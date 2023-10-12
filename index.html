@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='es'>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="estilos.css" />
+        <script src="lib/echarts.min.js" > </script>
+        <script defer src="lib/plot.js"></script>
+        <script defer src="script.js"></script>
+
+        <title> PM PEMBU</title>
+    </head>
+  
+    <body>
+        <div id="div_header">
+            <img class='logo' src='https://ruoa.unam.mx/pembu/xopan/img/logo_pembu2.png' alt='Logo PEMBU' >
+            <img class='logo' src='https://ruoa.unam.mx/pembu/xopan/img/logo_icaycc.png' alt='Logo ICAyCC' >
+            <span> <H1> Sistema de Monitoreo de Partículas </H1> </span>
+        </div>
+
+        <div id="div_sel" > Estacion: 
+            <label > <select id="plantel">
+		<option disabled selected value> Selecciona </option>
+                <option value="icaycc"> pmpembu20230001 </option>
+                <option value="icaycc"> pmpembu20230002 </option>
+            </select> </label>
+
+        </div>
+
+        <div id="div_plot">
+        </div>
+
+    </body>
+  
+</html>
