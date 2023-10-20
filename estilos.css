@@ -6,11 +6,13 @@ body{
     }
 
 /* div sel  */
-#div_sel{
+.div_sel{
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 400px;
+    align-self: flex-start;
+    margin-left: 10px;
     }
     
 
@@ -35,9 +37,9 @@ align-items: center;
 	height: 75px;
 }
 
-#plantel{
-	font-size: 24px;
-	margin: 16px;
+.selecciona{
+	font-size: 20px;
+	margin: 5px;
 	border-style:hidden;
 	background-color:lightblue;
 }
@@ -47,7 +49,7 @@ input[type="button"]{
     font-size: 16px;
     background-color: inherit;
     color: darkblue;
-    border-style: hidden;
+    border-style: solid;
     margin: 5px;
 }
 
