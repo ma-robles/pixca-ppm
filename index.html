@@ -19,8 +19,11 @@
             <span> <H1> Sistema de Monitoreo de Partículas </H1> </span>
         </div>
 
+        <form action='https://ruoa.unam.mx:8041/'>
+            <input type='hidden' name='pm_api'>
+
         <div id="div_sta" class="div_sel"  > Estacion: 
-            <label > <select id="plantel" class="selecciona" >
+            <label > <select id="plantel" class="selecciona" name='sid' >
                 <option disabled selected value> Selecciona </option>
                 <option value="pmpembu20230001"> pmpembu20230001 </option>
                 <option value="pmpembu20230002"> pmpembu20230002 </option>
@@ -35,8 +38,9 @@
 
         </div>
 
+
         <div id="div_date" class="div_sel" > Fecha: 
-            <label > <select id="Fecha" class="selecciona" >
+            <label > <select id="Fecha" class="selecciona" name='date'>
                 <option disabled selected value> Selecciona </option>
                 <option value="2023-10-14"> 2023-10-14 </option>
                 <option value="2023-10-15"> 2023-10-15 </option>
@@ -73,8 +77,10 @@
 
         </div>
         <div id="div_btn" class="div_sel" >
-            <input type="button" value="Mostrar" id="btn_plot"/>
+            <input type="button" value="Graficar" id="btn_plot"/>
+            <input type="submit" value="Descargar" id="btn_download"/>
         </div>
+        </form>
 
         <div id="div_plot">
         </div>
