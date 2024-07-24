@@ -5,27 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="shortcut icon" href="https://ruoa.unam.mx/logos/RUOA_logo.png"/>
-        <link rel="stylesheet" href="estilos.css" />
+        <link rel="stylesheet" href="style.css" />
         <script src="lib/echarts.min.js" > </script>
-        <script defer src="lib/plot.js"></script>
+        <script defer src=lib/plot.js"></script>
         <script defer src="script.js"></script>
 
         <title> PM PEMBU</title>
     </head>
-  
+
     <body>
         <div id="div_header">
             <img class='logo' src='https://ruoa.unam.mx/logos/logo_pembu2.png' alt='Logo PEMBU' >
             <img class='logo' src='https://ruoa.unam.mx/logos/logo_icaycc.png' alt='Logo ICAyCC' >
-            <span> <H1> Sistema de Monitoreo de Partículas </H1> </span>
+            <span> <h1> Sistema de Monitoreo de Partículas </h1> </span>
         </div>
 
         <form action='https://ruoa.unam.mx:8041/'>
             <input type='hidden' name='pm_api'>
 
-        <div id="div_sta" class="div_sel"  > Estacion: 
+        <div id="div_sta" class="div_sel"> Estación:
             <label > <select id="plantel" class="selecciona" name='sid' >
-                <option disabled selected value> Selecciona </option>
+                <option disabled selected value id="a"> Selecciona</option>
                 <option value="pixca_ppm012"> pixca_ppm012 </option>
                 <option value="pixca_ppm013"> pixca_ppm013 </option>
                 <option value="pixca_ppm015"> pixca_ppm015 </option>
@@ -33,24 +33,24 @@
 
         </div>
 
-        <div id="div_year" class="div_sel"  > año:
+        <div id="div_year" class="div_sel"> Año:
             <label > <select id="year" class="selecciona" name='year' >
-                <option disabled selected value> Selecciona </option>
+                <option disabled selected value id="a"> Selecciona</option>
             </select> </label>
 
         </div>
 
-        <div id="div_month" class="div_sel"  > mes:
+        <div id="div_month" class="div_sel"> Mes:
             <label > <select id="mes" class="selecciona" name='mes' >
-                <option disabled selected value> Selecciona </option>
+                <option disabled selected value id="a"> Selecciona</option>
             </select> </label>
 
         </div>
 
 
-        <div id="div_date" class="div_sel" > Fecha: 
+        <div id="div_date" class="div_sel" > Fecha:
             <label > <select id="Fecha" class="selecciona" name='date'>
-                <option disabled selected value> Selecciona </option>
+                <option disabled selected value id="a"> Selecciona</option>
                 <!-- <option value="2024-03-17"> 2024-03-17 </option> -->
             </select> </label>
 
@@ -65,5 +65,7 @@
         </div>
 
     </body>
-  
+
 </html>
+<!-- 6910 script, 3797index -->
+<!-- 3986 index, 1347css, 6934script-->
