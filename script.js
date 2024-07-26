@@ -6,6 +6,19 @@ const sel_month = document.getElementById("mes");
 const sel_fecha = document.getElementById("Fecha");
 let currentStep = 1; 
 
+function get_csv(){
+  const sta = document.getElementById("plantel");
+  sid=sta.value;
+
+  const dte = document.getElementById("Fecha");
+  date = dte.value;
+  console.log( sid, date);
+
+  const url = 'https://ruoa.unam.mx:8042/pm_api&sid='+ sid + '&date='+ date;
+  var a = document.getElementById('csvURL');
+  a.href=url;
+}
+
 hideButtons();
 
 function hideButtons() {
@@ -55,6 +68,7 @@ function hideButtons() {
       sel_month.disabled = true; 
       sel_fecha.disabled = true; 
       btn_plot.style.display = "block";
+      get_csv();
       document.getElementById("btn_download").style.display = "block";
       break;
   }
