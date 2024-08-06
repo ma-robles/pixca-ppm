@@ -1,9 +1,11 @@
-html {
+html,
+body {
   height: 100%;
   width: 100%;
-  font-family: 'Arial', sans-serif; 
-  background-color: #f4f4f4; 
-  color: #333; 
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
 }
 
 body {
@@ -11,111 +13,221 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-size: 18px; 
-  padding: 20px 0; 
-  min-height: 100vh; 
+  font-size: 18px;
+  padding: 20px 0;
+  min-height: 100vh;
+  background-color: #f4f4f9;
 }
 
 header {
-  width: 100%; 
+  width: 100%;
   height: 80px;
-  background-color: #00b09b; 
+  background-color: #00b09b;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 20px; 
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+  padding: 0 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
   height: 75px;
-  width: auto; 
+  width: auto;
 }
 
 h1 {
-  font-size: 2.5vw; 
-  color: darkslategray; 
-  margin: 0; 
+  font-size: 2.5vw;
+  color: darkslategray;
+  margin: 0;
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px; 
-  margin-top: 20px; 
+  width: 500px;
+  margin-top: 20px;
 }
 
-select {
-  margin-bottom: 10px;
+select,
+.selecciona {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%; 
-  appearance: none; 
+  width: 100%;
+  appearance: none;
+  background-color: #f5f5f5;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .div_sel {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center; 
-  width: 100%; 
-  margin-bottom: 15px; 
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .div_sel label {
-  margin-left: 10px; 
+  margin-left: 10px;
+  font-weight: bold;
 }
 
-button, input[type="button"], input[type="submit"] { 
+button,
+input[type="button"],
+input[type="submit"],
+#downloadZip,
+#div_btn input,
+#div_btn button {
   font-size: 16px;
   background-color: #00b09b;
   color: #fff;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #00b09b;
+  border: 2px solid #00b09b;
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
-button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+#downloadZip:hover,
+#div_btn input:hover,
+#div_btn button:hover {
   background-color: #008075;
 }
 
 #div_btn {
   display: flex;
-  justify-content: space-around; 
-  width: 100%; 
+  justify-content: space-around;
+  width: 100%;
   margin-top: 20px;
 }
 
 #div_plot {
-  width: 100%;
-  height: 500px;
+  width: 80%;
+  height: 600px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 20px; 
+  margin-top: 20px;
 }
 
-.selecciona {
-  font-size: 18px;
-  margin: 5px;
-  border-style: hidden;
-  background-color: #f5f5f5; 
+#calendar-container {
+  width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+#calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
+  background-color: #007BFF;
+  color: white;
+}
+
+#calendar-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+#calendar-header button:hover {
+  color: #0056b3;
+}
+
+#month-year {
+  font-size: 1.2em;
+}
+
+#day-names {
+  display: flex;
+  background-color: #007BFF;
+  padding: 5px 0;
+  color: white;
+  font-weight: bold;
+}
+
+#day-names div {
+  flex: 1;
+  text-align: center;
+}
+
+#days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#days div {
+  width: calc(112.25% / 8);
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#days div.disabled {
+  background-color: #f9f9f9;
+  color: #ccc;
+  cursor: default;
+}
+
+#days div:hover:not(.disabled) {
+  background-color: #007BFF;
+  color: white;
+}
+
+#days div.selected {
+  background-color: #007BFF;
+  color: white;
+}
+
+#div_sta {
+  margin-bottom: 20px;
+}
+
+#div_sta select {
+  padding: 5px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  color: #333;
-  appearance: none; 
-  border: 1px solid #ccc; 
 }
 
 #a {
   color: #ccc;
-} 
-.div_sel select {
-  border: 1px solid #ccc; 
-  
+}
+
+#month-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#downloadZip {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: #fff;
+  border: 2px solid #007BFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+#downloadZip:hover {
+  background-color: #0056b3;
 }
