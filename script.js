@@ -1,112 +1,217 @@
-const btn_plot = document.getElementById("btn_plot");
-btn_plot.addEventListener("click", plot);
-const station = document.getElementById("plantel");
-const sel_year = document.getElementById("year");
-const sel_month = document.getElementById("mes");
-const sel_fecha = document.getElementById("Fecha");
-let currentStep = 1; 
+const calendarContainer = document.getElementById("calendar-container");
+const monthYearDisplay = document.getElementById("month-year");
+const daysContainer = document.getElementById("days");
+const prevMonthButton = document.getElementById("prev-month");
+const nextMonthButton = document.getElementById("next-month");
+const yearSelect = document.getElementById("year");
+const monthSelect = document.getElementById("mes");
+const stationSelect = document.getElementById("plantel");
+const startDateInput = document.getElementById("start-date");
+const endDateInput = document.getElementById("end-date");
+const downloadZipButton = document.getElementById("downloadZip");
+const btnPlot = document.getElementById("btn_plot");
 
-hideButtons();
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let selectedDates = [];
+let selectedStartDate = null;
+let selectedEndDate = null;
+let currentStep = 1;
 
-function hideButtons() {
-  station.style.display = "none";
-  sel_year.style.display = "none";
-  sel_month.style.display = "none";
-  sel_fecha.style.display = "none";
-  btn_plot.style.display = "none";
-  document.getElementById("btn_download").style.display = "none";
+//Calendario
 
-  switch (currentStep) {
-    case 1:
-      station.style.display = "block";
-      station.disabled = false; 
-      break;
-    case 2:
-      station.style.display = "block";
-      sel_year.style.display = "block";
-      station.disabled = true; 
-      sel_year.disabled = false; 
-      break;
-    case 3:
-      station.style.display = "block";
-      sel_year.style.display = "block";
-      sel_month.style.display = "block";
-      station.disabled = true; 
-      sel_year.disabled = true; 
-      sel_month.disabled = false; 
-      break;
-    case 4:
-      station.style.display = "block";
-      sel_year.style.display = "block";
-      sel_month.style.display = "block";
-      sel_fecha.style.display = "block";
-      station.disabled = true; 
-      sel_year.disabled = true; 
-      sel_month.disabled = true; 
-      sel_fecha.disabled = false; 
-      break;
-    case 5:
-      station.style.display = "block";
-      sel_year.style.display = "block";
-      sel_month.style.display = "block";
-      sel_fecha.style.display = "block";
-      station.disabled = true; 
-      sel_year.disabled = true;
-      sel_month.disabled = true; 
-      sel_fecha.disabled = true; 
-      btn_plot.style.display = "block";
-      document.getElementById("btn_download").style.display = "block";
-      break;
-  }
+function updateCalendar() {
+    const selectedStation = stationSelect.value;
+    if (selectedStation) {
+        loadYearsForStation(selectedStation); // Fetch and display years
+    } 
 }
 
-async function load_years() {
-  console.log('cambio', station.value);
-  var year = await get_year(station.value);
-  for (y of year) {
-    var opt = document.createElement('option');
-    opt.value = y;
-    opt.innerHTML = y;
-    sel_year.appendChild(opt);
-  }
-  currentStep = 2;
-  hideButtons();
+async function fetchYears(stationId) {
+    const response = await fetch(`https://ruoa.unam.mx:8042/pm_api?sid=${stationId}&action=get_years`);
+    if (!response.ok) {
+        throw new Error("Error al obtener los años");
+    }
+    const years = (await response.text()).split(",");
+    return years;
 }
 
-async function load_months() {
-  console.log('cambio', sel_year.value);
-  var months = await get_months(station.value, sel_year.value);
-  console.log(months);
-  for (m of months) {
-    var opt = document.createElement('option');
-    opt.value = m;
-    opt.innerHTML = m;
-    sel_month.appendChild(opt);
-  }
-  currentStep = 3;
-  hideButtons();
+async function fetchMonths(stationId, year) {
+    const response = await fetch(`https://ruoa.unam.mx:8042/pm_api?sid=${stationId}&action=get_months&year=${year}`);
+    if (!response.ok) {
+        throw new Error("Error al obtener los meses");
+    }
+    const months = (await response.text()).split(",");
+    return months;
 }
 
-async function load_dates() {
-  console.log('cambio', sel_month.value);
-  var dates = await get_days(station.value, sel_month.value);
-  console.log(dates);
-  for (d of dates) {
-    var opt = document.createElement('option');
-    opt.value = d;
-    opt.innerHTML = d;
-    sel_fecha.appendChild(opt);
-  }
-  currentStep = 4;
-  hideButtons();
+async function fetchDays(stationId, year, month) {
+    const response = await fetch(`https://ruoa.unam.mx:8042/pm_api?sid=${stationId}&action=get_days&year=${year}&month=${month}`);
+    if (!response.ok) {
+        throw new Error("Error al obtener los días");
+    }
+    const days = (await response.text()).split(",");
+    return days;
 }
 
-station.addEventListener("change", load_years);
-sel_year.addEventListener("change", load_months);
-sel_month.addEventListener("change", load_dates);
-sel_fecha.addEventListener("change", () => {
-  currentStep = 5;
-  hideButtons();
+async function loadDatesForStation(stationId, year, month) {
+    const dates = await fetchDays(stationId, year, month);
+    renderCalendar(month, year, dates);
+}
+
+async function loadYearsForStation(stationId) {
+    const years = await fetchYears(stationId);
+    yearSelect.innerHTML = ""; // Clear previous years
+    years.forEach(year => {
+        const option = document.createElement("option");
+        option.value = year;
+        option.text = year;
+        yearSelect.add(option);
+    });
+
+    const defaultYear = years[0]; 
+    loadMonthsForStation(stationId, defaultYear);
+}
+
+async function loadMonthsForStation(stationId, year) {
+    const months = await fetchMonths(stationId, year);
+    monthSelect.innerHTML = ''; 
+    months.forEach(month => {
+        const option = document.createElement("option");
+        option.value = month;
+        option.text = month;
+        monthSelect.add(option);
+    });
+
+    const defaultMonth = months[0]; 
+    loadDatesForStation(stationId, year, defaultMonth);
+}
+
+function renderCalendar(month, year, availableDates) {
+    daysContainer.innerHTML = "";
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.classList.add("disabled");
+        daysContainer.appendChild(emptyCell);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayCell = document.createElement("div");
+        dayCell.textContent = day;
+
+        dayCell.classList.add("available");
+        dayCell.addEventListener("click", function() {
+            handleDateSelection(new Date(year, month, day));
+        });
+
+        daysContainer.appendChild(dayCell);
+    }
+
+    const remainingCells = 42 - daysInMonth - firstDay;
+    for (let i = 0; i < remainingCells; i++) {
+        const emptyCell = document.createElement("div");
+        emptyCell.classList.add("disabled");
+        daysContainer.appendChild(emptyCell);
+    }
+}
+
+function handleDateSelection(date) {
+    if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+        selectedStartDate = date;
+        selectedEndDate = null;
+    } else if (selectedStartDate && !selectedEndDate) {
+        selectedEndDate = date;
+    }
+    updateSelectedDates();
+}
+
+function updateSelectedDates() {
+    const dayCells = daysContainer.querySelectorAll("div");
+    dayCells.forEach(cell => {
+        cell.classList.remove("selected", "start-date", "end-date");
+    });
+
+    if (selectedStartDate) {
+        const startCell = [...dayCells].find(cell => parseInt(cell.textContent) === selectedStartDate.getDate());
+        if (startCell) {
+            startCell.classList.add("selected", "start-date");
+        }
+    }
+
+    if (selectedEndDate) {
+        const endCell = [...dayCells].find(cell => parseInt(cell.textContent) === selectedEndDate.getDate());
+        if (endCell) {
+            endCell.classList.add("selected", "end-date");
+        }
+    }
+}
+
+stationSelect.addEventListener("change", updateCalendar);
+
+prevMonthButton.addEventListener("click", function() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    const selectedStation = stationSelect.value;
+    if (selectedStation) {
+        loadDatesForStation(selectedStation, currentYear, currentMonth);
+    }
 });
 
-hideButtons();
+nextMonthButton.addEventListener("click", function() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    const selectedStation = stationSelect.value;
+    if (selectedStation) {
+        loadDatesForStation(selectedStation, currentYear, currentMonth);
+    }
+});
+
+
+// Función asíncrona para obtener datos en formato ZIP
+async function fetchZipData(startDate, endDate) {
+    const stationId = stationSelect.value;
+    // Realiza una petición fetch a la API para obtener los datos en formato ZIP
+    const response = await fetch(`https://ruoa.unam.mx:8042/pm_api?sid=${stationId}&action=download_zip`, {
+        method: 'POST',
+        body: `startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&sid=${stationId}`
+    });
+    if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    // Devuelve los datos como un Blob
+    return await response.blob();
+}
+
+downloadZipButton.addEventListener("click", async () => {
+    const startDate = selectedStartDate;
+    const endDate = selectedEndDate;
+    if (startDate && endDate) {
+        try {
+            const blob = await fetchZipData(startDate, endDate);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'data.zip');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Error fetching ZIP data:', error);
+        }
+    } else {
+        alert("Selecciona un rango de fechas para descargar.");
+    }
+});
+
+renderCalendar(currentMonth, currentYear, []);
