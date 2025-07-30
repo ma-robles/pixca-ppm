@@ -1,121 +1,182 @@
 html {
-  height: 100%;
-  width: 100%;
-  font-family: 'Arial', sans-serif; 
-  background-color: #f4f4f4; 
-  color: #333; 
+  font-family:'Times New Roman', Times, serif; 
+  background: linear-gradient(to bottom right, #e0f7fa, #80deea); 
 }
-
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-size: 18px; 
-  padding: 20px 0; 
-  min-height: 100vh; 
-}
 
-header {
-  width: 100%; 
-  height: 80px;
-  background-color: #00b09b; 
+  margin:0;
+}
+#div_header {
   display: flex;
+  background-image: url('https://i0.wp.com/www.atmosfera.unam.mx/wp-content/uploads/2017/05/1-estrenan-segundo-piso-edificio-fondo-2013-e1494606204990.png?ssl=1');
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 20px; 
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+  justify-content: center;
 }
+.logoPembu{
+  height: 14%;
+  width: auto;
 
-.logo {
-  height: 75px;
-  width: auto; 
+  display: flex;
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
+.logoICA {
 
+  width: auto;
+  height: 70%;
+
+  
+  display: flex;
+}
+.logoUNAM {
+  height: 15%;
+  width: auto;
+  
+  display: flex;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  filter: invert(1);
+}
 h1 {
-  font-size: 2.5vw; 
-  color: darkslategray; 
-  margin: 0; 
+  font-size: 5vw; 
+  color: rgb(33, 56, 56); 
+   
+  text-align: center;
+  margin:20px;
 }
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px; 
-  margin-top: 20px; 
+#info_box {
+    background-color: #ffffff; 
+    border: 1px solid #ccc; 
+    padding: 2%; 
+    margin: 3%; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    width: 50%; 
+    max-width: 50%; 
 }
-
+#info_box h2 {
+    font-size: 2em; 
+    color: #00b09b; 
+    margin-bottom: 5%; 
+}
+#info_box p {
+    color: #333; 
+    line-height: 1.5; 
+}
+#info_container {
+    display: flex;
+    width: 75%; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+#right_image {
+    height: auto;
+    width: 28%; 
+    display: flex;
+    margin: 10%;
+    position: absolute;
+    right: 0;
+}
+.selecciona {
+  font-size: 18px;
+  margin: 3%;
+  background-color: #fffefeb6; 
+  appearance: menulist-button;
+  border: 1px solid #ccc; 
+  padding: 5%;
+}
 select {
-  margin-bottom: 10px;
+  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100%; 
   appearance: none; 
+  align-items: center;
 }
-
+h3 {
+    font-size: 1.8em;
+    text-align: center;
+    color: #333;
+    margin: 3%;
+}
+h4{
+  background-color: #adadad;
+   background-size: contain;
+   width: 70%;
+  font-size: 1.3em;
+  margin: 2%;
+}
 .div_sel {
+  font-size: 1.8em;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center; 
-  width: 100%; 
-  margin-bottom: 15px; 
+  margin-bottom: 3%; 
 }
-
-.div_sel label {
-  margin-left: 10px; 
+.cuadro {
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  background-color:rgba(10, 142, 194, 0.661);
 }
-
+#availability-calendar-container {
+    margin: 5px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 40%;
+}
 button, input[type="button"], input[type="submit"] { 
   font-size: 16px;
   background-color: #00b09b;
   color: #fff;
   border-style: solid;
-  border-width: 2px;
-  border-color: #00b09b;
+  border-color: #01887854;
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color .5s ease;
 }
 
 button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
-  background-color: #008075;
+  background-color:rgb(6, 197, 149);
 }
 
-#div_btn {
+.Botones {
   display: flex;
-  justify-content: space-around; 
-  width: 100%; 
-  margin-top: 20px;
+  justify-content: space-between;
+  margin: 1%;
 }
-
 #div_plot {
   width: 100%;
-  height: 500px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 20px; 
+  height: 400px;
+  margin-top: 5%;
+
+}
+#div_btn {
+  display: flex;
+  position: absolute;
+  right: 30%;
 }
 
-.selecciona {
-  font-size: 18px;
-  margin: 5px;
-  border-style: hidden;
-  background-color: #f5f5f5; 
-  padding: 10px;
-  border-radius: 5px;
-  color: #333;
-  appearance: none; 
-  border: 1px solid #ccc; 
+#btn_download {
+  margin: .5%;
+  display: flex;
+  position: absolute;
+  left: 30%;
 }
+#btn_back {
+  display: flex;
+  justify-items: center;
+  width: 100px;
 
-#a {
-  color: #ccc;
-} 
-.div_sel select {
-  border: 1px solid #ccc; 
-  
 }

@@ -15,13 +15,21 @@
 
     <body>
         <div id="div_header">
-            <img class='logo' src='https://ruoa.unam.mx/logos/logo_pembu2.png' alt='Logo PEMBU' >
-            <img class='logo' src='https://ruoa.unam.mx/logos/logo_icaycc.png' alt='Logo ICAyCC' >
-            <span> <h1> Sistema de Monitoreo de Partículas </h1> </span>
+            <img class='logoPembu' src='https://ruoa.unam.mx/logos/logo_pembu2.png' alt='Logo PEMBU' >
+            <img class='logoICA' src='https://www.atmosfera.unam.mx/wp-content/uploads/2024/05/Recurso-4@2x.png' alt='Logo ICAyCC' >
+            <img class='logoUNAM' src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Escudo-UNAM-escalable.svg/1822px-Escudo-UNAM-escalable.svg.png' alt='Logo UNAM'>
         </div>
 
-        <form action='https://ruoa.unam.mx:8042/'>
-            <input type='hidden' name='pm_api'>
+        <h1> Sistema de Monitoreo de Partículas </h1>    
+     <div id="info_container">
+        <div id="info_box">
+            <h2>¿Qué hace esta página?</h2>
+            <p>Esta página permite monitorear las partículas en el aire a través de diferentes estaciones. Puedes seleccionar una estación, elegir fechas disponibles y descargar los datos en formato CSV.</p>
+        </div>
+        <img src="Imageness/Satandard.jpeg" alt="Descripción" id="right_image" />
+    </div>
+
+        <input type='hidden' name='pm_api'>
 
         <div id="div_sta" class="div_sel"> Estación:
             <label > <select id="plantel" class="selecciona" name='sid' >
@@ -38,40 +46,34 @@
             </select> </label>
 
         </div>
+        <div class="cuadro">
+            <div id="availability-calendar-container">
+                    <h3>Fechas Disponibles:</h3>
+                    <div id="availability-calendar">
+                    
+                        <select id="sel_year" size="4"></select>
 
-        <div id="div_year" class="div_sel"> Año:
-            <label > <select id="year" class="selecciona" name='year' >
-                <option disabled selected value id="a"> Selecciona</option>
-            </select> </label>
+                        <select id="sel_month" size="4" style="display:none;"></select>
 
-        </div>
+                        <select id="sel_day" size="4" style="display:none;"></select>
 
-        <div id="div_month" class="div_sel"> Mes:
-            <label > <select id="mes" class="selecciona" name='mes' >
-                <option disabled selected value id="a"> Selecciona</option>
-            </select> </label>
-
-        </div>
-
-
-        <div id="div_date" class="div_sel" > Fecha:
-            <label > <select id="Fecha" class="selecciona" name='date'>
-                <option disabled selected value id="a"> Selecciona</option>
-                <!-- <option value="2024-03-17"> 2024-03-17 </option> -->
-            </select> </label>
+                   
+                    </div>
+            <input type="hidden" id="Fecha" />
+            </div>
 
         </div>
-        <div id="div_btn" class="div_sel" >
-            <input type="button" value="Graficar" id="btn_plot"/>
-            <a id="csvURL"> <input type="button" value="Descargar" id="btn_download"/></a>
-        </div>
-        </form>
 
-        <div id="div_plot">
-        </div>
+            <button id="btn_back" style="display:none;">⬅ Regresar</button>
+        
+        <div class="Botones">
+        <a id="csvURL"> <input type="button" value="Descargar" id="btn_download"/></a>
 
+        <div id="div_btn" class="div_sel">
+            <input type="button" value="Graficar" id="btn_plot" disabled />
+        </div>
+        </div>
+        <div id="div_plot"></div>
     </body>
 
 </html>
-<!-- 6910 script, 3797index -->
-<!-- 3986 index, 1347css, 6934script-->
