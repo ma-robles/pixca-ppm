@@ -124,3 +124,37 @@ sel_fecha.addEventListener("change", () => {
 });
 
 hideButtons();
+
+function populateSelect(names) {
+    const selectElement = document.getElementById('plantel');
+
+    // Vacía el contenido actual del select
+    selectElement.innerHTML = '<option disabled selected value id="a"> Selecciona</option>';
+
+    // Itera sobre la lista de nombres
+    names.forEach(name => {
+        // Crea un nuevo elemento <option>
+        const option = document.createElement('option');
+        // Establece el valor y el texto del <option>
+        option.value = name;
+        option.textContent = name;
+        // Agrega el <option> al <select>
+        selectElement.appendChild(option);
+    });
+}
+
+const names = [
+    "pmpembu20230001",
+    "pmpembu20230002",
+    "pmpembu20230003",
+    "pmpembu20230004",
+    "pmpembu20230005",
+    "pmpembu20230006",
+    "pixca_ppm012",
+    "pixca_ppm013",
+    "pixca_ppm015",
+    "pixca_ppm016",
+];
+
+populateSelect(names);
+
