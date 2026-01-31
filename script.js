@@ -14,7 +14,7 @@ function get_csv(){
   date = dte.value;
   console.log( sid, date);
 
-  const url = 'https://ruoa.unam.mx:8042/pm_api&sid='+ sid + '&date='+ date;
+  const url = 'https://10.20.12.50:8041/pm_api&sid='+ sid + '&date='+ date;
   var a = document.getElementById('csvURL');
   a.href=url;
 }
